@@ -2,7 +2,13 @@
 
 ### to_param_string/1
 Convert atom_map to param_string
-`%{key1: value1, key2: value2}` -> `?key1=value1&key2=value2&`
+```elixir:to_param_string/1
+%{key1: value1, key2: value2}
+```
+  ↓
+```
+"?key1=value1&key2=value2&"
+```
 
 ### atomize
 Convert string_map to atom_map recursively.
@@ -11,7 +17,9 @@ Convert string_map to atom_map recursively.
   "key1" => "value1",
   "child" => %{"child_key1" => "child_value2"}
 }
-  ->
+```
+  ↓
+```
 %{
   key1: "value1",
   child: %{child_key1: => "child_value2"}
@@ -27,7 +35,7 @@ by adding `map_converter` to your list of dependencies in `mix.exs`:
 ```elixir
 def deps do
   [
-    {:map_converter, "~> 0.1.0"}
+    {:lx, "~> 1.0.1"}
   ]
 end
 ```
