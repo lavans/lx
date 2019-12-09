@@ -55,21 +55,14 @@ defmodule Lx.MapConverter do
 
   # Remove :__struct__ & :__meta__ from any map. You can encode with Jason easily.
   def remove_metadata(target) do
-    is_struct = fn s -> is_map(s) && Map.has_key?(s, :__struct__) end
     value = fn v -> if(is_map(v) || is_list(v), do: remove_metadata(v), else: v) end
-
-    remove = fn x, key ->
-      {_, result} = Map.pop(x, key)
-      result
-    end
-
-    map = fn m -> if(is_struct.(m), do: Map.from_struct(m), else: m) |> remove.(:__meta__) end
+    filter = fn m -> Enum.filter(m, fn {k, _} -> !String.match?(to_string(k), ~r/__.+__/) end) end
 
     case target do
       nil -> nil
       %DateTime{} = x -> DateTime.to_iso8601(x)
       x when is_list(x) -> Enum.map(x, &remove_metadata(&1))
-      x when is_map(x) -> for {k, v} <- map.(x), into: %{}, do: {k, value.(v)}
+      x when is_map(x) -> for {k, v} <- filter.(x), into: %{}, do: {k, value.(v)}
       x -> x
     end
   end
