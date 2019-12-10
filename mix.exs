@@ -4,7 +4,7 @@ defmodule Lx.MixProject do
   def project do
     [
       app: :lx,
-      version: "1.0.3",
+      version: "1.0.4",
       elixir: "~> 1.9",
       description: "Lavans eliXir utilities",
       package: [
