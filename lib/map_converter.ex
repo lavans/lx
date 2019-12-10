@@ -18,11 +18,11 @@ defmodule Lx.MapConverter do
     |> Enum.filter(fn entry -> elem(entry, 0) != :__struct__ end)
     |> to_string_map()
     |> Enum.reduce(
-         "?",
-         fn header, acc ->
-           acc <> elem(header, 0) <> "=" <> elem(header, 1) <> "&"
-         end
-       )
+      "?",
+      fn header, acc ->
+        acc <> elem(header, 0) <> "=" <> elem(header, 1) <> "&"
+      end
+    )
   end
 
   # Convert atom_map to string_map
@@ -56,7 +56,11 @@ defmodule Lx.MapConverter do
   # Remove :__struct__ & :__meta__ from any map. You can encode with Jason easily.
   def remove_metadata(target) do
     value = fn v -> if(is_map(v) || is_list(v), do: remove_metadata(v), else: v) end
-    filter = fn m -> Enum.filter(m, fn {k, _} -> !String.match?(to_string(k), ~r/__.+__/) end) end
+
+    map = fn m ->
+      Map.from_struct(m)
+      |> Enum.filter(m, fn {k, _} -> !String.match?(to_string(k), ~r/__.+__/) end)
+    end
 
     case target do
       nil -> nil

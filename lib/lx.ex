@@ -1,6 +1,4 @@
 defmodule Lx do
-
-
   @doc """
   Hello world.
 
