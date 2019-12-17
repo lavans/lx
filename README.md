@@ -35,7 +35,7 @@ by adding `map_converter` to your list of dependencies in `mix.exs`:
 ```elixir
 def deps do
   [
-    {:lx, "~> 1.0.1"}
+    {:lx, "~> 1.0.5"}
   ]
 end
 ```

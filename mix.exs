@@ -4,7 +4,7 @@ defmodule Lx.MixProject do
   def project do
     [
       app: :lx,
-      version: "1.0.4",
+      version: "1.0.5",
       elixir: "~> 1.9",
       description: "Lavans eliXir utilities",
       package: [
@@ -13,7 +13,6 @@ defmodule Lx.MixProject do
         links: %{
           "GitHub" => "https://github.com/lavans/lx"
         }
-        # リンク集
       ],
       start_permanent: Mix.env() == :prod,
       deps: deps()

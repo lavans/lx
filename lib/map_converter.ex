@@ -71,4 +71,18 @@ defmodule Lx.MapConverter do
       x -> x
     end
   end
+
+  # Recursive filter.
+  # ex) filter(fn {_, v} -> v != %{}  end)
+  def filter(target, f) do
+    value = fn v -> if(is_map(v) || is_list(v), do: filter(v, f), else: v) end
+    map = fn m -> Enum.filter(m, f) end
+
+    case target do
+      nil -> nil
+      x when is_list(x) -> Enum.map(x, &filter(&1, f))
+      x when is_map(x) -> for {k, v} <- map.(x), into: %{}, do: {k, value.(v)}
+      x -> x
+    end
+  end
 end
