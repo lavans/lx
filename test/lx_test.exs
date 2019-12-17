@@ -16,11 +16,20 @@ defmodule LxTest do
 
   defp is_struct?(x), do: Map.has_key?(x, :__struct__)
 
-  test "remove_empty_map" do
+  test "filter with function" do
     result =
       %LxParam{id: 1, name: %{}}
       |> MapConverter.remove_metadata()
       |> MapConverter.filter(fn {_, v} -> v != %{} end)
+      |> inspect
+    assert !String.contains?(result, "{}")
+  end
+
+  test "filter_empty_map" do
+    result =
+      %LxParam{id: 1, name: %{}}
+      |> MapConverter.remove_metadata()
+      |> MapConverter.filter_empty_map()
       |> inspect
     assert !String.contains?(result, "{}")
   end

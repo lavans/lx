@@ -85,5 +85,5 @@ defmodule Lx.MapConverter do
     end
   end
 
-  def filter_empty_map(target), do: filter(x, fn {_, v} -> v != %{}  end)
+  def filter_empty_map(x), do: filter(x, fn {_, v} -> v != %{}  end)
 end
