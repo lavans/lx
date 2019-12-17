@@ -18,11 +18,11 @@ defmodule Lx.MapConverter do
     |> Enum.filter(fn entry -> elem(entry, 0) != :__struct__ end)
     |> to_string_map()
     |> Enum.reduce(
-      "?",
-      fn header, acc ->
-        acc <> elem(header, 0) <> "=" <> elem(header, 1) <> "&"
-      end
-    )
+         "?",
+         fn header, acc ->
+           acc <> elem(header, 0) <> "=" <> elem(header, 1) <> "&"
+         end
+       )
   end
 
   # Convert atom_map to string_map
@@ -73,7 +73,6 @@ defmodule Lx.MapConverter do
   end
 
   # Recursive filter.
-  # ex) filter(fn {_, v} -> v != %{}  end)
   def filter(target, f) do
     value = fn v -> if(is_map(v) || is_list(v), do: filter(v, f), else: v) end
     map = fn m -> Enum.filter(m, f) end
@@ -85,4 +84,6 @@ defmodule Lx.MapConverter do
       x -> x
     end
   end
+
+  def filter_empty_map(target), do: filter(x, fn {_, v} -> v != %{}  end)
 end
