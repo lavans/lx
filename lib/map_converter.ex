@@ -65,6 +65,7 @@ defmodule Lx.MapConverter do
 
     case target do
       nil -> nil
+      %Date{} = x -> Date.to_iso8601(x)
       %DateTime{} = x -> DateTime.to_iso8601(x)
       x when is_list(x) -> Enum.map(x, &remove_metadata(&1))
       x when is_map(x) -> for {k, v} <- map.(x), into: %{}, do: {k, value.(v)}
