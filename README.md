@@ -22,7 +22,7 @@ Convert string_map to atom_map recursively.
 ```
 %{
   key1: "value1",
-  child: %{child_key1: => "child_value2"}
+  child: %{child_key1: "child_value2"}
 }
 ``` 
 
