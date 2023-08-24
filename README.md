@@ -30,7 +30,7 @@ Convert string_map to atom_map recursively.
 ## Installation
 
 If [available in Hex](https://hex.pm/docs/publish), the package can be installed
-by adding `map_converter` to your list of dependencies in `mix.exs`:
+by adding `lx` to your list of dependencies in `mix.exs`:
 
 ```elixir
 def deps do
@@ -42,5 +42,5 @@ end
 
 Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
 and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
-be found at [https://hexdocs.pm/map_converter](https://hexdocs.pm/map_converter).
+be found at [https://hexdocs.pm/lx](https://hexdocs.pm/lx).
 
